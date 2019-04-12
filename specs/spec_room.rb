@@ -12,18 +12,51 @@ class RoomTest < MiniTest::Test
     @song2 = Song.new("Red Barchetta", "Rush")
     @song3 = Song.new("Prowler", "Iron Maiden")
     #need to be able to add songs to room so create array of songs
-    @songs = [@song1, @song2, @song3]
+    #array required as part of program spec
+    #@songs = [@song1, @song2, @song3]
 
     @guest1 = Guest.new("Alex")
     @guest2 = Guest.new("John")
     @guest3 = Guest.new("Katie")
     #create a room object and add songs to the room
-    @room1 = Room.new("E30 Room", @songs)
+    @room1 = Room.new("E30 Room")
   end
 
   def test_room_has_a_name
     assert_equal("E30 Room", @room1.room_name)
   end
+
+  # be able to add songs to room
+  # be able to add guests to room
+
+  def test_number_of_guests_in_room
+    assert_equal(0, @room1.number_of_guests_in_room)
+  end
+
+  def test_can_add_guest_to_room
+    @room1.can_add_guest_to_room(@guest1)
+    assert_equal(1, @room1.number_of_guests_in_room)
+  end
+
+  def test_can_remove_guest_from_room
+    @room1.can_add_guest_to_room(@guest1)
+    @room1.can_add_guest_to_room(@guest2)
+    @room1.can_remove_guest_from_room(@guest1)
+    assert_equal(1, @room1.number_of_guests_in_room)
+  end
+
+  def number_of_songs_on_playlist
+    assert_equal(0, @room1.number_of_songs_on_playlist)
+  end
+
+  def test_can_add_songs_to_room
+    @room1.can_add_songs_to_room(@song1)
+    @room1.can_add_songs_to_room(@song2)
+    assert_equal(2, @room1.number_of_songs_on_playlist)
+  end
+
+
+
 
 
 
